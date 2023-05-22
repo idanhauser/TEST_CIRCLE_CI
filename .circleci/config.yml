@@ -22,6 +22,7 @@ jobs:
       - run:
           name: "ls_run"
           command: |
+            sleep 2m 30s
             ls
             pwd
 
