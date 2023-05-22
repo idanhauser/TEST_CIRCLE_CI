@@ -31,5 +31,4 @@ workflows:
             team-id: "fbe1c520-c91b-11ec-875f-fd7819f86b4e"
             appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
             output: "appname.apk"
-            filters: *filters
-         
+
