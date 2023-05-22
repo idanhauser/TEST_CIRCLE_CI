@@ -22,7 +22,6 @@ jobs:
       - run:
           name: "ls_run"
           command: |
-            sleep 2m 30s
             sudo ls /home/circleci/project/output/
 
 
@@ -37,6 +36,8 @@ workflows:
             team-id: "81bdde00-a0a7-11ed-a4f2-810d8884a7b1"
             appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
             output: "appname.apk"
-      - "say-hello"
+      - say-hello:
+            requires:
+              - test-android-autodev-private-sign
 
 
