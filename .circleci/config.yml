@@ -16,14 +16,11 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
-      - appdome-orb/appdome_runner:
-              name: "test-android-autodev-private-sign"
-              runner: "ANDROID_AUTO_DEV_SIGNING"
-              team-id: "81bdde00-a0a7-11ed-a4f2-810d8884a7b1"
-              appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
-              output: "appname.apk"
       - run:
-          name: "Clone Appdome API repository"
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "ls_run"
           command: |
             ls -l ./output
 
@@ -32,3 +29,12 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
+      - appdome-orb/appdome_runner:
+            name: "test-android-autodev-private-sign"
+            runner: "ANDROID_AUTO_DEV_SIGNING"
+            team-id: "81bdde00-a0a7-11ed-a4f2-810d8884a7b1"
+            appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
+            output: "appname.apk"
+      - "say-hello"
+
+
