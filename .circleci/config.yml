@@ -24,7 +24,6 @@ jobs:
           command: |
             sleep 2m 30s
             ls
-            pwd
 
 
 # Orchestrate jobs using workflows
