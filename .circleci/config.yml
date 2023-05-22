@@ -22,7 +22,7 @@ jobs:
       - run:
           name: "ls_run"
           command: |
-            ls -l ./output
+            ls -l ./output/
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
