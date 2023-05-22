@@ -22,8 +22,8 @@ jobs:
       - run:
           name: "ls_run"
           command: |
+            ls ~/project/
             sleep 2m 30s 
-            mkdir /output/appdome_fusion/
             sudo ls -l /output/
             sudo ls -l /output//appdome_fusion/
 
