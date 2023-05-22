@@ -22,7 +22,7 @@ jobs:
       - run:
           name: "ls_run"
           command: |
-            ls /home/circleci/
+            ls /home/circleci/project/
             pwd
 
 
