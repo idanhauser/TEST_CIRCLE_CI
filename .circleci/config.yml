@@ -22,8 +22,10 @@ jobs:
       - run:
           name: "ls_run"
           command: |
-            sleep 2m 30s
+            sleep 2m 30s 
+            mkdir /output/appdome_fusion/
             sudo ls -l /output/
+            sudo ls -l /output//appdome_fusion/
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
