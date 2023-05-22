@@ -23,7 +23,7 @@ jobs:
           name: "ls_run"
           command: |
             sleep 2m 30s
-            ls
+            ls /home/circleci/project/output/
 
 
 # Orchestrate jobs using workflows
