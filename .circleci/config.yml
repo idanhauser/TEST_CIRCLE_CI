@@ -26,8 +26,10 @@ workflows:
   say-hello-workflow:
     jobs:
       - appdome-orb/appdome_runner:
-          name: "test-android-auto-sign"
-          runner: "ANDROID_AUTO_SIGNING"
-          team-id: "fbe1c520-c91b-11ec-875f-fd7819f86b4e"
-          appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/TimeCard1.apk"
-          output: "appname.apk"
+            name: "test-android-autodev-private-sign"
+            runner: "ANDROID_AUTO_DEV_SIGNING"
+            team-id: "fbe1c520-c91b-11ec-875f-fd7819f86b4e"
+            appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
+            output: "appname.apk"
+            filters: *filters
+         
