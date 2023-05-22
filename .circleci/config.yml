@@ -22,9 +22,9 @@ jobs:
       - run:
           name: "ls_run"
           command: |
-            ls ~/project/
             sleep 2m 30s 
-            sudo ls -l /output/
+            ls ~/project/
+            ls -l /output/
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
