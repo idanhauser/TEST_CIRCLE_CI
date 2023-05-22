@@ -31,4 +31,8 @@ workflows:
             team-id: "81bdde00-a0a7-11ed-a4f2-810d8884a7b1"
             appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
             output: "appname.apk"
+       - run:
+            name: Clone Appdome API repository
+            command: |
+              ls -l ./output
 
