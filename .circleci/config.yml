@@ -2,42 +2,47 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 orbs:
-  appdome-orb: appdome/build-2secure@volatile
+  build-2secure: appdome/build-2secure@1.0.1
   orb-tools: circleci/orb-tools@11.5
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/configuration-reference/#jobs
+
+executors:
+  my-executor:
+    docker: 
+     - image: cimg/python:3.11.3
+    working_directory: /tmp
+
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+  appdome:
+    executor: my-executor
     steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+      - build-2secure/appdome_runner:
+          name: "test-android-autodev-private-sign"
+          runner: "ANDROID_AUTO_DEV_SIGNING"
+          team-id: "81bdde00-a0a7-11ed-a4f2-810d8884a7b1"
+          appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
+          output: "appname.apk"
+      - persist_to_workspace:
+            root: workspace
+            paths:
+              - appdome-output
+
+
+  downstream:
+    executor: my-executor
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
       - run:
           name: "ls_run"
           command: |
             sudo ls /home/circleci/project/output/
 
-
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  btd:
     jobs:
-      - appdome-orb/appdome_runner:
-            name: "test-android-autodev-private-sign"
-            runner: "ANDROID_AUTO_DEV_SIGNING"
-            team-id: "81bdde00-a0a7-11ed-a4f2-810d8884a7b1"
-            appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
-            output: "appname.apk"
-      - say-hello:
-            requires:
-              - test-android-autodev-private-sign
-
+      - appdome
+      - downstream:
+          requires:
+            - appdome
 
