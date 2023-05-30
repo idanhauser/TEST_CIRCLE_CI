@@ -27,12 +27,17 @@ jobs:
 workflows:
   btd:
     jobs:
+
       - build-2secure/appdome_runner:
           name: "test-android-autodev-private-sign"
           runner: "ANDROID_AUTO_DEV_SIGNING"
           team-id: "81bdde00-a0a7-11ed-a4f2-810d8884a7b1"
           appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
           output: "appname.apk"
+          pre-steps:
+            - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+                at: /tmp
           post-steps: # steps to run after steps defined in the job bar
             - persist_to_workspace:
                 root: /tmp
