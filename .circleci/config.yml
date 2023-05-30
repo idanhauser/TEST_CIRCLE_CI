@@ -17,12 +17,12 @@ jobs:
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
+          at: /tmp
       - run:
           name: "ls_run"
           command: |
-            sudo ls /tmp/workspace
-            sudo ls /tmp/workspace/appdome-output
+            sudo ls /tmp
+            sudo ls /tmp/appdome-output
 
 workflows:
   btd:
@@ -35,7 +35,7 @@ workflows:
           output: "appname.apk"
           post-steps: # steps to run after steps defined in the job bar
             - persist_to_workspace:
-                root: workspace
+                root: /tmp
                 paths:
                   - appdome-output
       - downstream:
