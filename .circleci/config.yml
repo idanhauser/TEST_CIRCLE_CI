@@ -12,21 +12,6 @@ executors:
     working_directory: /tmp
 
 jobs:
-  appdome:
-    executor: my-executor
-    steps:
-      - build-2secure/appdome_runner:
-          name: "test-android-autodev-private-sign"
-          runner: "ANDROID_AUTO_DEV_SIGNING"
-          team-id: "81bdde00-a0a7-11ed-a4f2-810d8884a7b1"
-          appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
-          output: "appname.apk"
-      - persist_to_workspace:
-            root: workspace
-            paths:
-              - appdome-output
-
-
   downstream:
     executor: my-executor
     steps:
@@ -41,8 +26,13 @@ jobs:
 workflows:
   btd:
     jobs:
-      - appdome
+      - build-2secure/appdome_runner:
+          name: "test-android-autodev-private-sign"
+          runner: "ANDROID_AUTO_DEV_SIGNING"
+          team-id: "81bdde00-a0a7-11ed-a4f2-810d8884a7b1"
+          appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
+          output: "appname.apk"
       - downstream:
           requires:
-            - appdome
+            - test-android-autodev-private-sign
 
