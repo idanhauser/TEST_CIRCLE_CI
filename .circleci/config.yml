@@ -22,6 +22,7 @@ jobs:
           name: "ls_run"
           command: |
             sudo ls /tmp/workspace
+            sudo ls /tmp/workspace/appdome-output
 
 workflows:
   btd:
@@ -32,6 +33,11 @@ workflows:
           team-id: "81bdde00-a0a7-11ed-a4f2-810d8884a7b1"
           appFile: "https://github.com/idanhauser/TestAppdome_orb_private/raw/main/files/AndroidMediaPlayer.apk"
           output: "appname.apk"
+          post-steps: # steps to run after steps defined in the job bar
+            - persist_to_workspace:
+                root: workspace
+                paths:
+                  - appdome-output
       - downstream:
           requires:
             - test-android-autodev-private-sign
